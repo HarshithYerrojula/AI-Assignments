@@ -2,7 +2,7 @@ class BridgeCrossingState:
     def __init__(self, left_side, right_side, umbrella_side, elapsed_time, max_time=60):
         self.left = frozenset(left_side)
         self.right = frozenset(right_side)
-        self.umbrella = umbrella_side     # 'L' or 'R'
+        self.umbrella = umbrella_side  
         self.time = elapsed_time
         self.max_time = max_time
         self.cross_time = {'A':5, 'M':10, 'GM':20, 'GF':25}
@@ -13,7 +13,7 @@ class BridgeCrossingState:
     def generate_moves(self):
         next_states = []
         if self.umbrella == 'L':
-            # Move 1 or 2 people from left to right
+    
             for p1 in self.left:
                 new_left = set(self.left)
                 new_right = set(self.right)
@@ -30,7 +30,7 @@ class BridgeCrossingState:
                         if time2 <= self.max_time:
                             next_states.append(BridgeCrossingState(new_left2, new_right2, 'R', time2))
         else:
-            # Move one person back from right to left
+            
             for p in self.right:
                 new_left = set(self.left)
                 new_right = set(self.right)
@@ -50,10 +50,10 @@ class BridgeCrossingState:
     def __repr__(self):
         return f"L:{sorted(self.left)} R:{sorted(self.right)} Umb:{self.umbrella} Time:{self.time}"
 
-# Reusing the same BFS, DFS, filtering and path reconstruction as above:
+
 
 if __name__ == "__main__":
-    # Initialize all on left side
+    
     start_bridge = BridgeCrossingState(['A', 'M', 'GM', 'GF'], [], 'L', 0)
     print("Bridge Crossing BFS:")
     bfs_search(start_bridge)
